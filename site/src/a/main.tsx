@@ -1,17 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { LangProvider, useLang } from '@shared/i18n'
-import { useQuote } from '@shared/useQuote'
-import { DirectionSwitch } from '@shared/DirectionSwitch'
-
-function Stub() {
-  const { t } = useLang()
-  const q = useQuote()
-  return <main><h1>{t.hero.headlines.a.join(' ')}</h1><p>{q.message}</p><DirectionSwitch current="a" /></main>
-}
+import '@fontsource/anton/400.css'
+import '@fontsource-variable/inter/wght.css'
+import './a.css'
+import { LangProvider } from '@shared/i18n'
+import { App } from './App'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <LangProvider><Stub /></LangProvider>
+    <LangProvider>
+      <App />
+    </LangProvider>
   </StrictMode>,
 )
