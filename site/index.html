@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <title>Mendez-Vasquez LLC · Website directions</title>
+    <style>
+      :root { --bg: #f3f1ec; --ink: #141414; --stone: #6f6c66; --rule: #dcd8cf; }
+      * { box-sizing: border-box; margin: 0; }
+      body { background: var(--bg); color: var(--ink); font: 16px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif; padding: 56px 16px 72px; }
+      main { max-width: 1240px; margin: 0 auto; }
+      .k { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--stone); }
+      h1 { font-size: clamp(32px, 5vw, 56px); line-height: 1.02; letter-spacing: -.02em; margin: 14px 0 12px; font-weight: 800; }
+      p.l { color: var(--stone); max-width: 560px; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 44px; }
+      a.card { display: block; color: inherit; text-decoration: none; background: #fff; border: 1px solid var(--rule); border-radius: 10px; overflow: hidden; transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s; }
+      a.card:hover { transform: translateY(-4px); box-shadow: 0 18px 50px rgba(0,0,0,.12); }
+      a.card img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+      .meta { padding: 18px 20px 22px; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+      .meta b { font-size: 20px; letter-spacing: -.01em; }
+      .meta span { color: var(--stone); font-size: 14px; }
+      .go { font-weight: 600; font-size: 14px; white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="k">Mendez-Vasquez LLC · Union City, NJ</div>
+      <h1>Three directions, one site.</h1>
+      <p class="l">Same content, same quote-from-photos form, English and Spanish. Pick the look that fits. Use the A / B / C switch at the bottom-left of each page to compare.</p>
+      <div class="grid">
+        <a class="card" href="%BASE_URL%a/"><img src="%BASE_URL%directions/a.jpg" alt="Direction A, Hi-Vis" /><div class="meta"><div><b>A · Hi-Vis</b><br /><span>Black and safety yellow, loud and bold</span></div><span class="go">Open →</span></div></a>
+        <a class="card" href="%BASE_URL%b/"><img src="%BASE_URL%directions/b.jpg" alt="Direction B, Clean Slate" /><div class="meta"><div><b>B · Clean Slate</b><br /><span>Light, editorial, upscale</span></div><span class="go">Open →</span></div></a>
+        <a class="card" href="%BASE_URL%c/"><img src="%BASE_URL%directions/c.jpg" alt="Direction C, Truck Side" /><div class="meta"><div><b>C · Truck Side</b><br /><span>Dark street photo, truck-stripe red</span></div><span class="go">Open →</span></div></a>
+      </div>
+    </main>
+  </body>
+</html>

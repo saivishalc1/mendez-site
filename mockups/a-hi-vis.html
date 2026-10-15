@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>A — Hi-Vis</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0b0b0a;--coal:#151513;--vis:#d9f23a;--bone:#f1efe8;--stone:#8d8b83}
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1440px;height:900px;background:var(--ink);color:var(--bone);font-family:Inter,sans-serif;overflow:hidden;position:relative}
+.photo{position:absolute;top:0;right:0;width:760px;height:792px;background:url(img/photo-2000.jpg) 38% 50%/cover no-repeat;filter:grayscale(1) contrast(1.15) brightness(.78)}
+.photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 0%,rgba(11,11,10,0) 34%)}
+nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:30px 56px;z-index:3}
+.logo{font-family:Anton;font-size:26px;letter-spacing:.02em;line-height:1}
+.logo small{display:block;font-family:Inter;font-size:10px;letter-spacing:.32em;color:var(--vis);margin-top:4px;font-weight:600}
+.links{display:flex;gap:36px;font-size:13px;font-weight:500;color:#cfcdc5}
+.right{display:flex;gap:18px;align-items:center}
+.lang{font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--stone)}.lang b{color:var(--bone)}
+.call{background:var(--vis);color:var(--ink);font-weight:700;font-size:14px;padding:13px 20px;border-radius:2px}
+.copy{position:absolute;left:56px;top:150px;width:900px;z-index:2}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--vis)}
+h1{font-family:Anton;font-weight:400;font-size:178px;line-height:.86;text-transform:uppercase;margin:26px 0 30px;letter-spacing:-.005em}
+h1 span{color:var(--vis)}
+.lede{font-size:19px;line-height:1.55;color:#c9c7bf;max-width:470px}
+.ctas{display:flex;gap:14px;margin-top:38px}
+.btn{background:var(--vis);color:var(--ink);font-weight:700;font-size:16px;padding:21px 30px;border-radius:2px}
+.ghost{border:1.5px solid #3a3a36;font-weight:600;font-size:16px;padding:20px 28px;border-radius:2px}
+.ghost b{color:var(--vis)}
+.badge{position:absolute;right:56px;top:560px;z-index:3;background:var(--vis);color:var(--ink);width:170px;height:170px;border-radius:50%;display:grid;place-items:center;text-align:center;font-family:Anton;font-size:24px;line-height:1;text-transform:uppercase;transform:rotate(-10deg)}
+.badge small{display:block;font-family:Inter;font-size:10px;font-weight:700;letter-spacing:.16em;margin-top:6px}
+.tape{position:absolute;left:0;right:0;bottom:0;height:108px;background:var(--vis);color:var(--ink);display:flex;align-items:center;gap:40px;padding-left:56px;font-family:Anton;font-size:46px;text-transform:uppercase;white-space:nowrap;z-index:3}
+.tape i{font-style:normal;width:14px;height:14px;background:var(--ink);transform:rotate(45deg);flex:none}
+.hz{position:absolute;left:0;right:0;bottom:108px;height:12px;background:repeating-linear-gradient(-45deg,var(--ink) 0 14px,var(--vis) 14px 28px);z-index:3}
+</style></head><body>
+<div class="photo"></div>
+<nav><div class="logo">MENDEZ-VASQUEZ<small>CLEANOUTS · JUNK · DEMO</small></div>
+<div class="links"><span>Services</span><span>Our work</span><span>How it works</span><span>Areas</span></div>
+<div class="right"><span class="lang"><b>EN</b> / ES</span><span class="call">(201) 723-2298</span></div></nav>
+<div class="copy">
+  <div class="eyebrow">Union City · Hudson County, NJ</div>
+  <h1>You point.<br><span>We haul.</span></h1>
+  <p class="lede">Basements, yards, vacant apartments and full demolition. Send a few photos and get a price, with no site visit needed.</p>
+  <div class="ctas"><span class="btn">Get a free quote from photos →</span><span class="ghost">Call or text <b>201-723-2298</b></span></div>
+</div>
+<div class="badge"><div>Licensed<br>&amp; insured<small>NEW JERSEY</small></div></div>
+<div class="hz"></div>
+<div class="tape"><span>Basements</span><i></i><span>Yard cleanouts</span><i></i><span>Vacant apartments</span><i></i><span>Demolition</span><i></i><span>Junk removal</span></div>
+</body></html>
