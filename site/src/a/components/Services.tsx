@@ -1,5 +1,5 @@
 import { useRef, useState, type PointerEvent } from 'react'
-import { motion, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react'
+import { m, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
 import { useLang } from '@shared/i18n'
 import { photos, videos } from '@shared/media'
@@ -14,9 +14,9 @@ function Band() {
   const y = useTransform(scrollYProgress, [0, 1], ['-8%', '8%'])
   return (
     <div ref={ref} className="surface-dark relative isolate flex min-h-[88svh] overflow-hidden bg-ink text-bone md:min-h-[92svh]">
-      <motion.div style={reduce ? undefined : { y }} className="absolute inset-x-0 -top-[10%] -bottom-[10%] -z-10">
+      <m.div style={reduce ? undefined : { y }} className="absolute inset-x-0 -top-[10%] -bottom-[10%] -z-10">
         <LazyVideo src={videos.demo.src} poster={videos.demo.poster} className="bw-video h-full w-full object-cover" />
-      </motion.div>
+      </m.div>
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(11,11,10,.82)_0%,rgba(11,11,10,.35)_38%,rgba(11,11,10,.55)_70%,#0b0b0a_100%)]" />
       <div className="wrap flex flex-col justify-end pt-32 pb-14 md:pb-20">
         <Reveal>
@@ -109,7 +109,7 @@ export function Services() {
           </ol>
 
             {fine && (
-              <motion.div
+              <m.div
                 aria-hidden
                 className="pointer-events-none absolute top-0 left-0 z-20"
                 style={{ x: sx, y: sy }}
@@ -117,7 +117,7 @@ export function Services() {
                 animate={{ opacity: active === null ? 0 : 1, scale: active === null || reduce ? 0.85 : 1 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
               >
-                <div className="relative -mt-[150px] ml-[36px] h-[268px] w-[268px] rotate-[-4deg] overflow-hidden rounded-[2px] bg-ink shadow-[0_24px_60px_rgba(0,0,0,.35)] ring-[6px] ring-ink">
+                <div className="relative -mt-[134px] -ml-[134px] h-[268px] w-[268px] rotate-[-4deg] overflow-hidden rounded-[2px] bg-ink shadow-[0_24px_60px_rgba(0,0,0,.35)] ring-[6px] ring-ink">
                   {items.map((item, i) => {
                     const ph = photos[item.media]
                     return (
@@ -135,7 +135,7 @@ export function Services() {
                   })}
                   <span className="label absolute bottom-0 left-0 bg-vis px-2.5 py-1.5 text-[10px] text-ink">0{(active ?? 0) + 1}</span>
                 </div>
-              </motion.div>
+              </m.div>
             )}
           </div>
         </div>

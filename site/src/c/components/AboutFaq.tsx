@@ -1,5 +1,5 @@
 import { useId, useState } from 'react'
-import { motion } from 'motion/react'
+import { m } from 'motion/react'
 import { Plus } from 'lucide-react'
 import { rich, useLang } from '@shared/i18n'
 import { titleLines } from './QuoteParts'
@@ -46,7 +46,7 @@ export function AboutFaq() {
             </Rise>
             <ul className="facts">
               {ab.facts.map((fct, i) => (
-                <motion.li
+                <m.li
                   key={fct.k}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +55,7 @@ export function AboutFaq() {
                 >
                   <span className="facts-k d-cond">{fct.k}</span>
                   <span className="facts-v">{fct.v}</span>
-                </motion.li>
+                </m.li>
               ))}
             </ul>
           </div>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { useDeferredPoster } from '@shared/useDeferredPoster'
+import { m, useMotionValueEvent, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { Check, X } from 'lucide-react'
 import { useLang } from '@shared/i18n'
 import { videos } from '@shared/media'
@@ -19,10 +20,10 @@ function Town({ name, i, n, p }: { name: string; i: number; n: number; p: Motion
   const x = useTransform(p, [at - 0.06, at], [0, 14])
   const tick = useTransform(p, [at - 0.06, at], [0, 1])
   return (
-    <motion.li style={{ opacity }}>
-      <motion.i style={{ scaleX: tick }} aria-hidden="true" />
-      <motion.span style={{ x }}>{name}</motion.span>
-    </motion.li>
+    <m.li style={{ opacity }}>
+      <m.i style={{ scaleX: tick }} aria-hidden="true" />
+      <m.span style={{ x }}>{name}</m.span>
+    </m.li>
   )
 }
 
@@ -32,6 +33,7 @@ function ScrubAreas() {
   const a = t.areas
   const ref = useRef<HTMLDivElement>(null)
   const vid = useRef<HTMLVideoElement>(null)
+  useDeferredPoster(vid, videos.cityScrub.poster)
   const near = useNear(ref, '600px')
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const target = useRef(0)
@@ -64,7 +66,7 @@ function ScrubAreas() {
   return (
     <div ref={ref} className="areas-pin">
       <div className="areas-stage">
-        <video ref={vid} className="areas-video" poster={videos.cityScrub.poster} muted playsInline preload="none" aria-hidden="true" tabIndex={-1} />
+        <video ref={vid} className="areas-video" muted playsInline preload="none" aria-hidden="true" tabIndex={-1} />
         <div className="areas-shade" aria-hidden="true" />
         <div className="wrap areas-inner">
           <div className="areas-copy">
@@ -74,7 +76,7 @@ function ScrubAreas() {
             </h2>
             <p className="areas-body">{a.body}</p>
             <p className="areas-count d-wide" aria-hidden="true">
-              <motion.span>{counter}</motion.span>
+              <m.span>{counter}</m.span>
               <small>/{String(a.towns.length).padStart(2, '0')}</small>
             </p>
           </div>
@@ -106,7 +108,7 @@ function LoopAreas() {
         </div>
         <ul className="towns towns-static d-cond">
           {a.towns.map((tn, i) => (
-            <motion.li
+            <m.li
               key={tn}
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -115,7 +117,7 @@ function LoopAreas() {
             >
               <i aria-hidden="true" />
               <span>{tn}</span>
-            </motion.li>
+            </m.li>
           ))}
         </ul>
       </div>
@@ -141,7 +143,7 @@ export function Areas() {
         <div className="takes-grid">
           <ul className="takes-yes">
             {k.yes.map((y, i) => (
-              <motion.li
+              <m.li
                 key={y}
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -152,7 +154,7 @@ export function Areas() {
                   <Check size={16} strokeWidth={3} />
                 </span>
                 {y}
-              </motion.li>
+              </m.li>
             ))}
           </ul>
           <Rise className="takes-no">

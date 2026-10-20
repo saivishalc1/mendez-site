@@ -1,5 +1,5 @@
 import { Fragment, useRef } from 'react'
-import { motion, useAnimationFrame, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, useVelocity } from 'motion/react'
+import { m, useAnimationFrame, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform, useVelocity } from 'motion/react'
 import { useLang } from '@shared/i18n'
 import { videos } from '@shared/media'
 import { LazyVideo, useNear } from './ui'
@@ -42,9 +42,9 @@ function Row({ items, dir, speed, outline, run }: { items: string[]; dir: 1 | -1
 
   return (
     <div className={`mq-row ${outline ? 'mq-outline' : ''}`}>
-      <motion.div className="mq-track" style={{ x }}>
+      <m.div className="mq-track" style={{ x }}>
         {[0, 1, 2, 3].map(seq)}
-      </motion.div>
+      </m.div>
     </div>
   )
 }
@@ -60,9 +60,9 @@ export function VideoBand() {
 
   return (
     <section ref={ref} className="vband" aria-label={t.footer.tagline}>
-      <motion.div className="vband-media" style={{ y: vy }}>
+      <m.div className="vband-media" style={{ y: vy }}>
         <LazyVideo src={videos.dump.src} poster={videos.dump.poster} className="vband-video" />
-      </motion.div>
+      </m.div>
       <div className="vband-shade" aria-hidden="true" />
       <div className="vband-text d-cond" aria-hidden="true">
         <Row items={names} dir={-1} speed={3.2} run={run} />

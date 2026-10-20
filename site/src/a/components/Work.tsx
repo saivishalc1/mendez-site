@@ -1,5 +1,5 @@
 import { useLang } from '@shared/i18n'
-import { photos } from '@shared/media'
+import { photos, srcSetOf } from '@shared/media'
 import type { MediaKey } from '@shared/content/en'
 import { Kicker, Reveal, Title } from './ui'
 
@@ -9,7 +9,7 @@ function BigShot({ media, caption, index, total, className = '' }: { media: Medi
     <Reveal as="figure" className={`group relative overflow-hidden rounded-[2px] bg-coal ${className}`}>
       <img
         src={ph.src}
-        srcSet={ph.sm ? `${ph.sm} 900w, ${ph.src} 1920w` : undefined}
+        srcSet={srcSetOf(ph)}
         sizes="(min-width: 768px) 60vw, 100vw"
         width={ph.w}
         height={ph.h}
@@ -49,7 +49,7 @@ export function Work() {
           <BigShot media={big[0].media} caption={big[0].caption} index={indexOf(big[0].media)} total={items.length} className="aspect-[4/3] md:col-span-8" />
         )}
         {big[1] && (
-          <BigShot media={big[1].media} caption={big[1].caption} index={indexOf(big[1].media)} total={items.length} className="aspect-[4/3] md:col-span-6 md:aspect-auto md:min-h-full" />
+          <BigShot media={big[1].media} caption={big[1].caption} index={indexOf(big[1].media)} total={items.length} className="aspect-[4/3] self-start md:col-span-6" />
         )}
 
         <ul className="grid grid-cols-2 gap-x-3 gap-y-6 pt-4 sm:grid-cols-3 md:col-span-6 md:gap-x-5 md:pt-0">

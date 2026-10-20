@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react'
+import { AnimatePresence, m, useMotionValueEvent, useScroll } from 'motion/react'
 import { useLenis } from 'lenis/react'
 import { Menu, Phone, X } from 'lucide-react'
 import { useLang, type Lang } from '@shared/i18n'
@@ -80,7 +80,7 @@ export function Nav() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             id="c-menu"
             className="menu"
             role="dialog"
@@ -100,7 +100,7 @@ export function Nav() {
             </div>
             <nav aria-label="Menu" className="wrap menu-links">
               {links.map((l, i) => (
-                <motion.a
+                <m.a
                   key={l.href}
                   href={l.href}
                   onClick={(e) => {
@@ -119,7 +119,7 @@ export function Nav() {
                 >
                   <span className="menu-n">0{i + 1}</span>
                   {l.label}
-                </motion.a>
+                </m.a>
               ))}
             </nav>
             <div className="wrap menu-foot">
@@ -138,7 +138,7 @@ export function Nav() {
               </a>
               <div className="menu-tape tape" aria-hidden="true" />
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

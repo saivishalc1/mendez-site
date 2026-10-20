@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useRef, useSyncExternalStore, type ElementType, type ReactNode } from 'react'
-import { motion, useReducedMotion } from 'motion/react'
+import { useDeferredPoster } from '@shared/useDeferredPoster'
+import { m, useReducedMotion } from 'motion/react'
 import { rich } from '@shared/i18n'
 import { lowPower } from '@shared/SmoothScroll'
 
@@ -54,7 +55,7 @@ export function Reveal({
   as?: 'div' | 'li' | 'figure' | 'header'
 }) {
   const reduce = useReducedMotion()
-  const Comp = motion[as]
+  const Comp = m[as]
   if (reduce) {
     const Plain = as
     return <Plain className={className}>{children}</Plain>
@@ -118,6 +119,7 @@ export function useMedia(query: string) {
 export function LazyVideo({ src, poster, className = '' }: { src: string; poster: string; className?: string }) {
   const ref = useRef<HTMLVideoElement>(null)
   const reduce = useReducedMotion()
+  useDeferredPoster(ref, poster)
   useEffect(() => {
     const v = ref.current
     if (!v || reduce || lowPower()) return
@@ -138,7 +140,6 @@ export function LazyVideo({ src, poster, className = '' }: { src: string; poster
     <video
       ref={ref}
       className={className}
-      poster={poster}
       muted
       loop
       playsInline

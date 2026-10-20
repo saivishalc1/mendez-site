@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { useDeferredPoster } from '@shared/useDeferredPoster'
+import { m, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { Check, Minus } from 'lucide-react'
 import { useLang } from '@shared/i18n'
 import { videos } from '@shared/media'
@@ -24,10 +25,10 @@ function Town({ name, i, n, progress }: { name: string; i: number; n: number; pr
   const opacity = useTransform(progress, [a - 0.08, a], [0.22, 1])
   const x = useTransform(progress, [a - 0.08, a], [-14, 0])
   return (
-    <motion.li style={{ opacity, x }} className="flex items-baseline gap-4">
-      <span className="w-7 text-[11px] tracking-[0.2em] text-stone-2 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+    <m.li style={{ opacity, x }} className="flex items-baseline gap-4">
+      <span className="w-7 font-sans text-[11px] tracking-[0.2em] text-stone-2 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
       <span>{name}</span>
-    </motion.li>
+    </m.li>
   )
 }
 
@@ -37,6 +38,7 @@ function Scrubbed() {
   const a = t.areas
   const ref = useRef<HTMLDivElement>(null)
   const video = useRef<HTMLVideoElement>(null)
+  useDeferredPoster(video, videos.cityScrub.poster)
   const { ref: nearRef, near } = useNear<HTMLDivElement>('600px')
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const raf = useRef(0)
@@ -56,19 +58,18 @@ function Scrubbed() {
   return (
     <div ref={ref} className="relative h-[260svh]">
       <div ref={nearRef} className="sticky top-0 h-svh overflow-hidden">
-        <motion.div className="absolute inset-0" style={{ scale }}>
+        <m.div className="absolute inset-0" style={{ scale }}>
           <video
             ref={video}
             className="grade-film size-full object-cover"
             src={near ? videos.cityScrub.src : undefined}
-            poster={videos.cityScrub.poster}
             muted
             playsInline
             preload={near ? 'auto' : 'none'}
             aria-hidden
             tabIndex={-1}
           />
-        </motion.div>
+        </m.div>
         <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgba(23,22,20,.88)_0%,rgba(23,22,20,.6)_45%,rgba(23,22,20,.2)_100%)]" />
         <div className="relative mx-auto grid h-full max-w-[1440px] grid-cols-12 items-center gap-14 px-16 pt-16">
           <div className="col-span-6">
@@ -96,7 +97,7 @@ function Simple() {
       <div className="absolute inset-0">
         <LazyVideo src={videos.cityScrub.mobile} poster={videos.cityScrub.poster} className="grade-film size-full object-cover" />
       </div>
-      <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(23,22,20,.9)_0%,rgba(23,22,20,.55)_45%,rgba(23,22,20,.92)_100%)]" />
+      <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(23,22,20,.78)_0%,rgba(23,22,20,.35)_40%,rgba(23,22,20,.9)_100%)]" />
       <div className="relative px-5 py-24 sm:px-8">
         <Label>{a.kicker}</Label>
         <Reveal>

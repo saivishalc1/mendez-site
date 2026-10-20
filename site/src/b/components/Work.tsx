@@ -1,8 +1,8 @@
 import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useLang } from '@shared/i18n'
 import { photos } from '@shared/media'
-import { Label, Reveal, Title } from './ui'
+import { Label, Reveal, Title, srcSet } from './ui'
 
 function Big({
   k,
@@ -26,17 +26,17 @@ function Big({
   const p = photos[k]
   return (
     <figure ref={ref} className={className}>
-      <motion.div
+      <m.div
         className={`relative overflow-hidden rounded-[2px] bg-paper-2 ${frame}`}
         initial={reduce ? false : { clipPath: 'inset(0% 0% 100% 0%)' }}
         whileInView={{ clipPath: 'inset(0% 0% 0% 0%)' }}
         viewport={{ once: true, margin: '0px 0px -15% 0px' }}
         transition={{ duration: 1.4, ease: [0.7, 0, 0.2, 1] }}
       >
-        <motion.img
+        <m.img
           src={p.src}
-          srcSet={p.sm ? `${p.sm} 900w, ${p.src} 1920w` : undefined}
-          sizes="(min-width: 1024px) 60vw, 100vw"
+          srcSet={srcSet(p)}
+          sizes={k === 'streetTruck' ? '(min-width: 1024px) 62vw, 100vw' : '(min-width: 1024px) 30vw, 100vw'}
           width={p.w}
           height={p.h}
           alt={p.alt}
@@ -45,7 +45,7 @@ function Big({
           style={{ y, objectPosition: position }}
           className="grade absolute inset-[-7%_0] h-[114%] w-full object-cover"
         />
-      </motion.div>
+      </m.div>
       <figcaption className="mt-3.5 flex items-baseline gap-4 text-[12px] tracking-[0.04em] text-stone">
         <span className="tabular-nums">{n}</span>
         <span className="font-medium text-ink">{caption}</span>
@@ -61,7 +61,7 @@ export function Work() {
 
   return (
     <section id="work" aria-labelledby="work-title" className="relative border-t border-rule">
-      <div className="mx-auto max-w-[1440px] px-5 py-28 sm:px-8 lg:px-16 lg:py-40">
+      <div className="mx-auto max-w-[1440px] px-5 pt-24 pb-28 sm:px-8 lg:px-16 lg:pt-32 lg:pb-40">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-end lg:gap-14">
           <div className="lg:col-span-7">
             <Label>{w.kicker}</Label>

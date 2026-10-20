@@ -1,5 +1,5 @@
 import { useRef, useState, type PointerEvent } from 'react'
-import { motion, useMotionValue, useSpring, useTransform, useVelocity } from 'motion/react'
+import { m, useMotionValue, useSpring, useTransform, useVelocity } from 'motion/react'
 import { ArrowUpRight } from 'lucide-react'
 import { useLang } from '@shared/i18n'
 import { photos } from '@shared/media'
@@ -45,7 +45,7 @@ export function Services() {
           {s.items.map((item, i) => {
             const ph = photos[item.media]
             return (
-              <motion.article
+              <m.article
                 key={item.id}
                 className={`svc ${active === i ? 'is-active' : ''}`}
                 onPointerEnter={(e) => {
@@ -73,17 +73,17 @@ export function Services() {
                   {s.cta}
                   <ArrowUpRight size={18} strokeWidth={2.5} aria-hidden="true" />
                 </button>
-              </motion.article>
+              </m.article>
             )
           })}
 
-          <motion.div className="svc-preview" aria-hidden="true" style={{ x, y, rotate }} data-show={active !== null}>
+          <m.div className="svc-preview" aria-hidden="true" style={{ x, y, rotate }} data-show={active !== null}>
             <div className="svc-pv-in">
               {s.items.map((item, i) => (
                 <img key={item.id} src={photos[item.media].src} alt="" width={280} height={280} loading="lazy" decoding="async" className={active === i ? 'on' : ''} />
               ))}
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

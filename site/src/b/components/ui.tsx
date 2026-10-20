@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { motion, useReducedMotion } from 'motion/react'
+import { useDeferredPoster } from '@shared/useDeferredPoster'
+import { m, useReducedMotion } from 'motion/react'
 import { rich } from '@shared/i18n'
+import type { photos } from '@shared/media'
 
 export const ease = [0.2, 0.7, 0.2, 1] as const
 
@@ -43,7 +45,7 @@ export function Reveal({
   as?: 'div' | 'li' | 'figure' | 'p'
 }) {
   const reduce = useReducedMotion()
-  const M = motion[as]
+  const M = m[as]
   return (
     <M
       className={className}
@@ -61,7 +63,7 @@ export function Reveal({
 export function Rule({ className = '', delay = 0, dark = false }: { className?: string; delay?: number; dark?: boolean }) {
   const reduce = useReducedMotion()
   return (
-    <motion.div
+    <m.div
       aria-hidden
       className={`h-px origin-left ${dark ? 'bg-rule-dark' : 'bg-rule'} ${className}`}
       initial={reduce ? false : { scaleX: 0 }}
@@ -99,6 +101,7 @@ export function useNear<T extends Element>(margin = '400px') {
  */
 export function LazyVideo({ src, poster, className = '' }: { src: string; poster: string; className?: string }) {
   const { ref, near, visible } = useNear<HTMLVideoElement>('300px')
+  useDeferredPoster(ref, poster)
   const reduce = useReducedMotion()
   useEffect(() => {
     const v = ref.current
@@ -111,7 +114,6 @@ export function LazyVideo({ src, poster, className = '' }: { src: string; poster
       ref={ref}
       className={className}
       src={near && !reduce ? src : undefined}
-      poster={poster}
       muted
       playsInline
       loop
@@ -128,4 +130,15 @@ export function Arrow({ className = '' }: { className?: string }) {
       <path d="M4 12h15M13 6l6 6-6 6" />
     </svg>
   )
+}
+
+/** Responsive srcset for the hi-res photos (xs 640 / sm 900 / md 1280 / full 1920). */
+export function srcSet(p: (typeof photos)[keyof typeof photos]) {
+  const set = [
+    [p.xs, 640],
+    [p.sm, 900],
+    [p.md, 1280],
+    [p.src, p.w],
+  ].filter(([u]) => u) as [string, number][]
+  return set.length > 1 ? set.map(([u, w]) => `${u} ${w}w`).join(', ') : undefined
 }

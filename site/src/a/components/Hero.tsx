@@ -1,9 +1,9 @@
 import { useRef, type CSSProperties } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { ArrowRight, ShieldCheck } from 'lucide-react'
 import { plain, rich, useLang } from '@shared/i18n'
 import { business } from '@shared/business'
-import { photos } from '@shared/media'
+import { photos, srcSetOf } from '@shared/media'
 import { openQuote } from '@shared/useQuote'
 import { EASE, Tape } from './ui'
 
@@ -42,9 +42,9 @@ export function Hero() {
   const longestWord = Math.max(...lines.flatMap((l) => plain(l).split(/\s+/)).map((w) => w.length))
   const wrapOnMobile = longestLine > 13
   const fit = {
-    '--hl-d': `min(178px, 12.4vw, calc(min(1080px, 100vw - 112px) / ${(longestLine * 0.43).toFixed(2)}))`,
+    '--hl-d': `min(178px, 12.4vw, calc(min(980px, 100vw - 112px) / ${(longestLine * 0.43).toFixed(2)}))`,
     '--hl-m': wrapOnMobile
-      ? `min(86px, calc((100vw - 40px) / ${(longestWord * 0.47).toFixed(2)}))`
+      ? `min(74px, calc((100vw - 40px) / ${(longestWord * 0.47).toFixed(2)}))`
       : `min(100px, calc((100vw - 40px) / ${(longestLine * 0.44).toFixed(2)}))`,
   } as CSSProperties
 
@@ -58,10 +58,10 @@ export function Hero() {
     <section id="top" ref={ref} className="surface-dark relative isolate flex min-h-[100svh] flex-col overflow-hidden bg-ink text-bone md:min-h-[max(100svh,760px)]">
       {/* Photo */}
       <div className="absolute inset-x-0 top-0 z-0 h-[50svh] overflow-hidden md:bottom-[96px] md:left-auto md:h-auto md:w-[53%]">
-        <motion.div style={reduce ? undefined : { y: photoY }} className="absolute inset-x-0 -top-[10%] -bottom-[10%]">
+        <m.div style={reduce ? undefined : { y: photoY }} className="absolute inset-x-0 -top-[10%] -bottom-[10%]">
           <img
             src={img.src}
-            srcSet={`${img.sm} 900w, ${img.src} 1920w`}
+            srcSet={srcSetOf(img)}
             sizes="(min-width: 768px) 54vw, 100vw"
             width={img.w}
             height={img.h}
@@ -69,10 +69,10 @@ export function Hero() {
             fetchPriority="high"
             className="kenburns bw h-full w-full object-cover brightness-[.8] [object-position:38%_50%]"
           />
-        </motion.div>
+        </m.div>
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,11,10,.7)_0%,rgba(11,11,10,0)_24%,rgba(11,11,10,0)_55%,#0b0b0a_100%)] md:bg-[linear-gradient(90deg,#0b0b0a_0%,rgba(11,11,10,0)_36%),linear-gradient(180deg,rgba(11,11,10,.55)_0%,rgba(11,11,10,0)_22%)]" />
         {!reduce && (
-          <motion.div
+          <m.div
             aria-hidden
             className="absolute inset-0 origin-right bg-vis"
             initial={{ scaleX: 1 }}
@@ -83,55 +83,55 @@ export function Hero() {
       </div>
 
       {/* Copy */}
-      <motion.div
+      <m.div
         style={reduce ? undefined : { y: copyY }}
         className="wrap relative z-10 flex flex-1 flex-col justify-end pt-[35svh] pb-9 md:justify-center md:pt-32 md:pb-16"
       >
-        <motion.p {...intro(0.05)} className="label flex items-center gap-3 text-vis">
+        <m.p {...intro(0.05)} className="label flex items-center gap-3 text-vis">
           <span className="hazard-chip" aria-hidden />
           {t.hero.eyebrow}
-        </motion.p>
+        </m.p>
         <h1
           key={lang}
           aria-label={lines.map(plain).join(' ')}
           style={fit}
-          className={`hl display mt-5 mb-6 md:mt-7 md:mb-8 ${wrapOnMobile ? '' : 'hl-nowrap-m'}`}
+          className={`hl display mt-5 mb-6 md:mt-7 md:mb-8 ${wrapOnMobile ? "leading-[0.95] md:leading-[0.88]" : "hl-nowrap-m"}`}
         >
           {lines.map((line, i) => (
-            <span key={i} aria-hidden className="hl-line -my-[0.06em] block overflow-hidden py-[0.06em]">
-              <motion.span
+            <span key={i} aria-hidden className="hl-line -mt-[0.16em] -mb-[0.06em] block overflow-hidden pt-[0.16em] pb-[0.06em]">
+              <m.span
                 className="block"
                 initial={reduce ? false : { y: '108%' }}
                 animate={{ y: '0%' }}
                 transition={{ duration: 1.15, delay: 0.25 + i * 0.13, ease: EASE }}
               >
                 {rich(line, 'text-vis')}
-              </motion.span>
+              </m.span>
             </span>
           ))}
         </h1>
-        <motion.p {...intro(0.55)} className="max-w-[30rem] text-[17px] leading-[1.55] text-[#c9c7bf] md:text-[19px]">
+        <m.p {...intro(0.55)} className="max-w-[30rem] text-[17px] leading-[1.55] text-[#c9c7bf] md:text-[19px]">
           {t.hero.lede}
-        </motion.p>
-        <motion.div {...intro(0.68)} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-10 md:gap-3.5">
+        </m.p>
+        <m.div {...intro(0.68)} className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap md:mt-10 md:gap-3.5">
           <button type="button" className="btn btn-vis md:min-h-[62px] md:px-8" onClick={() => openQuote()}>
             {t.hero.primary} <ArrowRight className="arrow" size={19} strokeWidth={2.4} aria-hidden />
           </button>
           <a href={`tel:${business.phoneE164}`} className="btn btn-ghost font-semibold md:min-h-[62px] md:px-7">
             {t.hero.secondary} <b className="text-vis">{business.phoneDash}</b>
           </a>
-        </motion.div>
-      </motion.div>
+        </m.div>
+      </m.div>
 
       {/* Badge */}
-      <motion.div
-        className="absolute top-[calc(50svh-118px)] right-4 z-20 w-[104px] md:top-auto md:right-14 md:bottom-[150px] md:w-[178px]"
+      <m.div
+        className="absolute top-[84px] right-4 z-20 w-[100px] md:top-auto md:right-14 md:bottom-[150px] md:w-[178px]"
         initial={reduce ? false : { scale: 0, rotate: -40 }}
         animate={{ scale: 1, rotate: 0 }}
         transition={{ type: 'spring', stiffness: 140, damping: 14, delay: 0.95 }}
       >
         <Badge center={t.hero.badges[0]} ring={ring} />
-      </motion.div>
+      </m.div>
 
       {/* Hazard + tape */}
       <div className="relative z-20">

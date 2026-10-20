@@ -1,5 +1,5 @@
 import { useMemo, useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { useLang } from '@shared/i18n'
 import { Kicker, Reveal } from './ui'
 
@@ -23,9 +23,9 @@ function Word({ token, progress, i, n }: { token: Token; progress: MotionValue<n
   const opacity = useTransform(progress, [start - 0.015, start + 1.6 / n], [0.14, 1])
   return (
     <>
-      <motion.span style={{ opacity }} className={token.accent ? 'text-vis' : undefined}>
+      <m.span style={{ opacity }} className={token.accent ? 'text-vis' : undefined}>
         {token.text}
-      </motion.span>{' '}
+      </m.span>{' '}
     </>
   )
 }
@@ -56,7 +56,7 @@ export function Statement() {
           <Reveal className="mt-14 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-line pt-7 md:mt-20">
             {t.hero.badges.map((b, i) => (
               <span key={b} className="label flex items-center gap-5 text-[11.5px] text-stone">
-                {i > 0 && <i className="diamond text-vis" aria-hidden />}
+                {i > 0 && <i className="diamond hidden text-vis sm:inline-block" aria-hidden />}
                 <span className="text-bone">{b}</span>
               </span>
             ))}

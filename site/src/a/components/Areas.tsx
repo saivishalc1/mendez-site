@@ -1,5 +1,6 @@
 import { useEffect, useRef, type ReactNode } from 'react'
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { useDeferredPoster } from '@shared/useDeferredPoster'
+import { m, useMotionValueEvent, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { Check, X } from 'lucide-react'
 import { useLang } from '@shared/i18n'
 import { lowPower } from '@shared/SmoothScroll'
@@ -52,10 +53,10 @@ function Town({ name, i, progress, base }: { name: string; i: number; progress: 
   const start = 0.12 + i * 0.075
   const opacity = useTransform(progress, [start, start + 0.07], [base ? 1 : 0.2, 1])
   return (
-    <motion.li style={{ opacity }} className="flex items-center gap-[0.32em]">
+    <m.li style={{ opacity }} className="flex items-center gap-[0.32em]">
       <span className={base ? 'text-vis' : undefined}>{name}</span>
       <i className="diamond text-vis" aria-hidden />
-    </motion.li>
+    </m.li>
   )
 }
 
@@ -83,6 +84,7 @@ function AreasScrub() {
   const { t } = useLang()
   const wrapRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
+  useDeferredPoster(videoRef, videos.cityScrub.poster)
   const target = useRef(0)
   const { scrollYProgress } = useScroll({ target: wrapRef, offset: ['start start', 'end end'] })
   const barScale = useTransform(scrollYProgress, [0, 1], [0, 1])
@@ -133,7 +135,6 @@ function AreasScrub() {
           <video
             ref={videoRef}
             className="bw-video absolute inset-0 h-full w-full object-cover"
-            poster={videos.cityScrub.poster}
             muted
             playsInline
             preload="none"
@@ -150,7 +151,7 @@ function AreasScrub() {
               </ul>
             }
           />
-          <motion.div aria-hidden className="absolute inset-x-0 bottom-0 h-[6px] origin-left bg-vis" style={{ scaleX: barScale }} />
+          <m.div aria-hidden className="absolute inset-x-0 bottom-0 h-[6px] origin-left bg-vis" style={{ scaleX: barScale }} />
         </div>
       </div>
     </section>

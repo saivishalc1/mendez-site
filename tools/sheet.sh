@@ -7,4 +7,4 @@ fc=""; lay=""; for ((k=0;k<n;k++)); do fc+="[$k]scale=$sw:-2[s$k];"; x=$(( k % c
 # build layout with pixel offsets
 h=$(ffprobe -v error -select_streams v -show_entries stream=height -of csv=p=0 $fs[1]); sh=$(( h * sw / w ))
 lay=""; ins=""; for ((k=0;k<n;k++)); do lay+="${lay:+|}$(( (k % cols) * sw ))_$(( (k / cols) * sh ))"; ins+="[s$k]"; done
-ffmpeg -nostdin -v error -y $args -filter_complex "${fc}${ins}xstack=inputs=$n:layout=$lay:fill=magenta" $out && echo "$out ($n screens)"
+ffmpeg -nostdin -v error -y $args -filter_complex "${fc}${ins}xstack=inputs=${n}:layout=${lay}:fill=magenta" $out && echo "$out ($n screens)"

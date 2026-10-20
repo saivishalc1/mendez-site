@@ -1,5 +1,5 @@
 import { useRef, useState, type PointerEvent } from 'react'
-import { AnimatePresence, motion, useMotionValue, useReducedMotion, useSpring } from 'motion/react'
+import { AnimatePresence, m, useMotionValue, useReducedMotion, useSpring } from 'motion/react'
 import { useLang } from '@shared/i18n'
 import { photos } from '@shared/media'
 import { openQuote } from '@shared/useQuote'
@@ -21,7 +21,7 @@ export function Services() {
   const onMove = (e: PointerEvent) => {
     if (e.pointerType !== 'mouse' || !listRef.current) return
     const r = listRef.current.getBoundingClientRect()
-    x.set(e.clientX - r.left - PREVIEW / 2)
+    x.set(e.clientX - r.left + 36)
     y.set(e.clientY - r.top - PREVIEW * 0.62)
   }
 
@@ -35,10 +35,14 @@ export function Services() {
               <Title id="services-title" text={s.title} className="mt-6 text-[3rem] sm:text-[4rem] lg:text-[clamp(4.2rem,6vw,6.2rem)]" />
             </Reveal>
           </div>
-          <Reveal delay={0.1} className="lg:col-span-4 lg:pb-3">
-            <p className="text-[12px] tracking-[0.24em] text-stone uppercase">
-              0{s.items.length} / {t.nav.services}
-            </p>
+          <Reveal delay={0.1} className="lg:col-span-3 lg:col-start-10 lg:pb-4">
+            <ul className="flex flex-wrap gap-x-5 gap-y-2 lg:block">
+              {t.hero.badges.map((b) => (
+                <li key={b} className="text-[11px] tracking-[0.22em] text-stone uppercase lg:border-t lg:border-rule lg:py-2.5">
+                  {b}
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </div>
 
@@ -101,14 +105,14 @@ export function Services() {
 
           {/* cursor-follow preview (desktop, mouse only) */}
           {!reduce && (
-            <motion.div
+            <m.div
               aria-hidden
               className="pointer-events-none absolute top-0 left-0 z-10 hidden lg:block"
               style={{ x: sx, y: sy, width: PREVIEW, height: PREVIEW * 1.15 }}
             >
               <AnimatePresence>
                 {active !== null && (
-                  <motion.div
+                  <m.div
                     key={active}
                     className="absolute inset-0 overflow-hidden rounded-[2px] bg-paper-2 shadow-[0_30px_60px_-30px_rgba(23,22,20,.45)]"
                     initial={{ opacity: 0, scale: 0.92, clipPath: 'inset(12% 12% 12% 12%)' }}
@@ -123,10 +127,10 @@ export function Services() {
                       alt=""
                       className="grade size-full object-cover"
                     />
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </m.div>
           )}
         </ul>
       </div>

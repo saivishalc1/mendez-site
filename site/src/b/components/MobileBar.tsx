@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { useLang } from '@shared/i18n'
 import { business } from '@shared/business'
 import { openQuote } from '@shared/useQuote'
@@ -40,9 +40,9 @@ export function MobileBar() {
   return (
     <AnimatePresence>
       {show && (
-        <motion.nav
+        <m.nav
           aria-label={t.hero.primaryShort}
-          className="fixed right-2.5 bottom-3 left-[128px] z-[60] flex h-14 items-stretch gap-1 rounded-full bg-ink p-1 text-paper shadow-[0_14px_34px_-12px_rgba(23,22,20,.6)] md:hidden"
+          className="fixed right-2.5 bottom-3 left-[128px] z-[60] flex h-14 items-stretch gap-1 rounded-full border border-paper/15 bg-ink p-1 text-paper shadow-[0_14px_34px_-12px_rgba(23,22,20,.6)] md:hidden"
           initial={{ y: 90, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 90, opacity: 0 }}
@@ -69,7 +69,7 @@ export function MobileBar() {
           >
             {t.hero.primaryShort}
           </button>
-        </motion.nav>
+        </m.nav>
       )}
     </AnimatePresence>
   )

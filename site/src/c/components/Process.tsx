@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { useLang } from '@shared/i18n'
 import { openQuote } from '@shared/useQuote'
 import { titleLines } from './QuoteParts'
@@ -13,7 +13,7 @@ function Card({ step, i, n, progress }: { step: Step; i: number; n: number; prog
   const scale = useTransform(progress, [i / n, 1], [1, reduce ? 1 : target])
   return (
     <div className="pcard-slot" style={{ ['--i' as string]: i }}>
-      <motion.article className={`pcard pcard-${i}`} style={{ scale }}>
+      <m.article className={`pcard pcard-${i}`} style={{ scale }}>
         <div className="pcard-tape tape" aria-hidden="true" />
         <span className="pcard-n d-cond" aria-hidden="true">
           {step.n}
@@ -25,7 +25,7 @@ function Card({ step, i, n, progress }: { step: Step; i: number; n: number; prog
           </h3>
           <p>{step.body}</p>
         </div>
-      </motion.article>
+      </m.article>
     </div>
   )
 }

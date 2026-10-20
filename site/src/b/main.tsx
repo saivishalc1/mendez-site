@@ -5,12 +5,15 @@ import '@fontsource/instrument-serif/400-italic.css'
 import '@fontsource-variable/inter'
 import './b.css'
 import { LangProvider } from '@shared/i18n'
+import { MotionRoot } from '@shared/MotionRoot'
 import { App } from './App'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <LangProvider>
-      <App />
+      <MotionRoot>
+        <App />
+      </MotionRoot>
     </LangProvider>
   </StrictMode>,
 )

@@ -1,5 +1,5 @@
 import { useEffect, useState, type MouseEvent } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { useLenis } from 'lenis/react'
 import { Menu, Phone, X } from 'lucide-react'
 import { useLang } from '@shared/i18n'
@@ -98,7 +98,9 @@ export function Nav() {
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-4 lg:gap-5">
-            <LangToggle className="hidden sm:inline-flex" />
+            <span className="max-[359px]:hidden">
+              <LangToggle />
+            </span>
             <a
               href={`tel:${business.phoneE164}`}
               className="hidden min-h-11 items-center rounded-full border border-ink px-5 text-[13px] font-medium transition-colors duration-300 hover:bg-ink hover:text-paper md:inline-flex"
@@ -128,12 +130,12 @@ export function Nav() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             id="b-menu"
             role="dialog"
             aria-modal="true"
             aria-label={t.nav.menu}
-            className="fixed inset-0 z-[80] flex flex-col bg-paper px-5 pt-3.5 pb-8 sm:px-8"
+            className="fixed inset-0 z-[80] flex flex-col overflow-y-auto bg-paper px-5 pt-3.5 pb-24 sm:px-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.3 } }}
@@ -154,7 +156,7 @@ export function Nav() {
             <nav aria-label="Mobile" className="mt-10 flex-1">
               <ul className="border-t border-rule">
                 {links.map((l, i) => (
-                  <motion.li
+                  <m.li
                     key={l.href}
                     className="border-b border-rule"
                     initial={{ opacity: 0, y: 24 }}
@@ -165,11 +167,11 @@ export function Nav() {
                       <span className="w-6 text-[11px] tracking-[0.2em] text-stone">0{i + 1}</span>
                       <span className="font-serif text-[42px] leading-none tracking-[-0.02em]">{l.label}</span>
                     </a>
-                  </motion.li>
+                  </m.li>
                 ))}
               </ul>
             </nav>
-            <motion.div
+            <m.div
               className="flex flex-col gap-3"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -191,8 +193,8 @@ export function Nav() {
                 </a>
                 <LangToggle />
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { ArrowLeft, ArrowRight, Check, Mail, MessageCircle, MessageSquare, Phone } from 'lucide-react'
 import { useLang } from '@shared/i18n'
 import { business } from '@shared/business'
@@ -76,7 +76,7 @@ export function Quote({ q }: { q: QuoteApi }) {
           <div className="qcard-tape tape" aria-hidden="true" />
           <AnimatePresence mode="wait" initial={false}>
             {(q.status === 'idle' || q.status === 'sending' || q.status === 'error') && (
-              <motion.form key="form" className="qform" noValidate onSubmit={q.submit} {...swap}>
+              <m.form key="form" className="qform" noValidate onSubmit={q.submit} {...swap}>
                 <p className="qcard-step">{L.step2}</p>
                 <JobChips q={q} name="q-job" size="lg" />
                 <LoadBars q={q} name="q-load" />
@@ -141,11 +141,11 @@ export function Quote({ q }: { q: QuoteApi }) {
                   <ArrowRight size={22} strokeWidth={2.5} aria-hidden="true" />
                 </button>
                 <p className="qprivacy">{f.privacy}</p>
-              </motion.form>
+              </m.form>
             )}
 
             {q.status === 'choose' && (
-              <motion.div key="choose" className="qstate" {...swap}>
+              <m.div key="choose" className="qstate" {...swap}>
                 <h3 className="qstate-title d-cond">{f.chooseTitle}</h3>
                 <p className="qstate-body">{f.chooseBody}</p>
                 <div className="qchoose">
@@ -168,11 +168,11 @@ export function Quote({ q }: { q: QuoteApi }) {
                   <ArrowLeft size={18} aria-hidden="true" />
                   {f.back}
                 </button>
-              </motion.div>
+              </m.div>
             )}
 
             {q.status === 'sent' && (
-              <motion.div key="sent" className="qstate qsent" {...swap} role="status">
+              <m.div key="sent" className="qstate qsent" {...swap} role="status">
                 <span className="qsent-check" aria-hidden="true">
                   <Check size={34} strokeWidth={3} />
                 </span>
@@ -186,7 +186,7 @@ export function Quote({ q }: { q: QuoteApi }) {
                   <ArrowLeft size={18} aria-hidden="true" />
                   {f.back}
                 </button>
-              </motion.div>
+              </m.div>
             )}
           </AnimatePresence>
         </div>

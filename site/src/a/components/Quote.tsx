@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { AnimatePresence, m, useReducedMotion } from 'motion/react'
 import { ArrowLeft, ArrowRight, Camera, Check, Mail, MessageCircle, MessageSquare, Phone, Plus, X } from 'lucide-react'
 import { useLang } from '@shared/i18n'
 import { business } from '@shared/business'
@@ -334,7 +334,7 @@ export function Quote() {
         <div className="lg:col-span-5">
           <Reveal className="lg:sticky lg:top-[110px]">
             <Kicker tone="vis">{q.kicker}</Kicker>
-            <Title id="quote-title" tone="vis" text={q.title} className="mt-6 text-[clamp(64px,8.6vw,140px)] leading-[0.9]" />
+            <Title id="quote-title" tone="vis" text={q.title} className="mt-6 text-[clamp(64px,7.6vw,120px)] leading-[0.9]" />
             <p className="mt-7 max-w-[26rem] text-[18px] leading-[1.55] font-medium text-ink/80 md:text-[20px]">{q.sub}</p>
             <div className="mt-10 hidden border-t-2 border-ink pt-6 lg:block">
               <p className="label text-[11px] text-ink/70">{t.hero.secondary}</p>
@@ -348,7 +348,7 @@ export function Quote() {
         <div className="lg:col-span-7">
           <div className="surface-dark relative rounded-[3px] bg-ink p-5 text-bone shadow-[0_30px_80px_rgba(11,11,10,.28)] sm:p-8 md:p-11">
             <AnimatePresence mode="wait" initial={false}>
-              <motion.div
+              <m.div
                 key={step}
                 initial={reduce ? false : { opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -358,7 +358,7 @@ export function Quote() {
                 {step === 'form' && <FormStep api={api} />}
                 {step === 'choose' && <ChooseStep api={api} />}
                 {step === 'sent' && <SentStep api={api} />}
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
         </div>

@@ -1,8 +1,8 @@
 import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { ArrowRight } from 'lucide-react'
 import { rich, useLang } from '@shared/i18n'
-import { photos } from '@shared/media'
+import { photos, srcSetOf } from '@shared/media'
 import { business } from '@shared/business'
 import { openQuote, type QuoteApi } from '@shared/useQuote'
 import { local } from '../local'
@@ -26,10 +26,13 @@ export function Hero({ q }: { q: QuoteApi }) {
 
   return (
     <section ref={ref} id="top" className="hero" aria-labelledby="hero-title">
-      <motion.div className="hero-media" style={{ y: imgY, scale: imgScale }} aria-hidden="true">
-        <img
+      <m.div className="hero-media" style={{ y: imgY, scale: imgScale }} aria-hidden="true">
+        <m.img
+          initial={{ scale: 1.12 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 2.6, ease: [0.16, 1, 0.3, 1] }}
           src={img.src}
-          srcSet={`${img.sm} 900w, ${img.src} 1920w`}
+          srcSet={srcSetOf(img)}
           sizes="100vw"
           width={img.w}
           height={img.h}
@@ -37,12 +40,12 @@ export function Hero({ q }: { q: QuoteApi }) {
           fetchPriority="high"
           className="hero-img"
         />
-      </motion.div>
+      </m.div>
       <div className="hero-shade" aria-hidden="true" />
 
       <div className="wrap hero-grid">
-        <motion.div className="hero-copy" style={{ y: copyY }}>
-          <motion.p className="status" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15, ease }}>
+        <m.div className="hero-copy" style={{ y: copyY }}>
+          <m.p className="status" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15, ease }}>
             <b aria-hidden="true" />
             {t.hero.badges[2]}
             <span className="status-sep" aria-hidden="true">·</span>
@@ -51,17 +54,17 @@ export function Hero({ q }: { q: QuoteApi }) {
               <span className="status-sep" aria-hidden="true">·</span>
               {region}
             </span>
-          </motion.p>
+          </m.p>
           <h1 id="hero-title" className="hero-h1 d-cond">
             <MaskLines lines={t.hero.headlines.c.map((l) => rich(l, 'acc'))} delay={0.25} instant />
           </h1>
-          <motion.p className="hero-lede" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.7, ease }}>
+          <m.p className="hero-lede" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.7, ease }}>
             {t.hero.lede}
-          </motion.p>
-        </motion.div>
+          </m.p>
+        </m.div>
 
-        <motion.div className="hero-card-wrap" style={{ y: cardY }}>
-          <motion.form
+        <m.div className="hero-card-wrap" style={{ y: cardY }}>
+          <m.form
             className="hcard"
             aria-labelledby="hcard-title"
             initial={{ opacity: 0, y: 70 }}
@@ -88,14 +91,14 @@ export function Hero({ q }: { q: QuoteApi }) {
               {L.continue}
               <ArrowRight size={20} strokeWidth={2.5} aria-hidden="true" />
             </button>
-          </motion.form>
-        </motion.div>
+          </m.form>
+        </m.div>
       </div>
 
       <div className="hero-foot">
         <Stripe className="hero-tape" delay={0.8} instant />
         <div className="wrap hero-bottom">
-          <motion.a
+          <m.a
             href={`tel:${business.phoneE164}`}
             className="hero-phone"
             initial={{ opacity: 0, y: 24 }}
@@ -104,12 +107,12 @@ export function Hero({ q }: { q: QuoteApi }) {
           >
             <small>{t.contact.phoneLabel}</small>
             <span className="d-wide">{business.phoneDash}</span>
-          </motion.a>
-          <motion.ul className="hero-facts" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.2 }}>
+          </m.a>
+          <m.ul className="hero-facts" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.2 }}>
             <li>{t.hero.badges[0]}</li>
             <li>{t.hero.badges[1]}</li>
             <li>{region}</li>
-          </motion.ul>
+          </m.ul>
         </div>
       </div>
     </section>

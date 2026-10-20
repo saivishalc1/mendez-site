@@ -1,7 +1,7 @@
 import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform } from 'motion/react'
 import { useLang } from '@shared/i18n'
-import { photos } from '@shared/media'
+import { photos, srcSetOf } from '@shared/media'
 import type { MediaKey } from '@shared/content/en'
 import { titleLines } from './QuoteParts'
 import { Kicker, MaskLines, Rise } from './ui'
@@ -15,10 +15,10 @@ function BigPhoto({ media, caption, index, total, className }: { media: MediaKey
   return (
     <figure ref={ref} className={`wbig ${className}`}>
       <div className="wbig-frame">
-        <motion.img
+        <m.img
           style={{ y }}
           src={ph.src}
-          srcSet={ph.sm ? `${ph.sm} 900w, ${ph.src} 1920w` : undefined}
+          srcSet={srcSetOf(ph)}
           sizes="(min-width: 900px) 60vw, 100vw"
           alt={ph.alt}
           width={ph.w}
@@ -26,7 +26,7 @@ function BigPhoto({ media, caption, index, total, className }: { media: MediaKey
           loading="lazy"
           decoding="async"
         />
-        <motion.div
+        <m.div
           className="wbig-wipe"
           aria-hidden="true"
           initial={{ scaleY: 1 }}
@@ -77,7 +77,7 @@ export function Work() {
           {small.map((it, i) => {
             const ph = photos[it.media]
             return (
-              <motion.li
+              <m.li
                 key={it.media}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -95,7 +95,7 @@ export function Work() {
                     {it.caption}
                   </figcaption>
                 </figure>
-              </motion.li>
+              </m.li>
             )
           })}
         </ul>

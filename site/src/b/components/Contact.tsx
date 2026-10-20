@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'motion/react'
+import { m, useReducedMotion } from 'motion/react'
 import { useLang } from '@shared/i18n'
 import { business } from '@shared/business'
 import { openQuote } from '@shared/useQuote'
@@ -39,20 +39,23 @@ export function Contact() {
             className="group block w-fit max-w-full"
             aria-label={`${c.phoneLabel}: ${business.phoneDisplay}`}
           >
-            <span aria-hidden className="display block overflow-hidden pb-[0.06em] text-[clamp(3rem,13.4vw,12rem)] leading-[0.95] tracking-[-0.035em] whitespace-nowrap text-paper transition-colors duration-500 group-hover:text-rust-soft">
+            <m.span
+              aria-hidden
+              className="display block overflow-hidden pb-[0.06em] text-[min(18vw,17.5rem)] leading-[0.95] tracking-[-0.035em] whitespace-nowrap text-paper transition-colors duration-500 group-hover:text-rust-soft"
+              initial={reduce ? false : 'hidden'}
+              whileInView="show"
+              viewport={{ once: true, margin: '0px 0px -10% 0px' }}
+            >
               {digits.map((d, i) => (
-                <motion.span
+                <m.span
                   key={i}
                   className="inline-block"
-                  initial={reduce ? false : { y: '105%' }}
-                  whileInView={{ y: '0%' }}
-                  viewport={{ once: true, margin: '0px 0px -10% 0px' }}
-                  transition={{ duration: 1.1, ease, delay: i * 0.03 }}
+                  variants={{ hidden: { y: '105%' }, show: { y: '0%', transition: { duration: 1.1, ease, delay: i * 0.03 } } }}
                 >
                   {d === ' ' ? ' ' : d}
-                </motion.span>
+                </m.span>
               ))}
-            </span>
+            </m.span>
           </a>
         </div>
 

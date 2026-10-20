@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" source("./");
 
 /* Direction A — Hi-Vis: ink + safety yellow, Anton + Inter */
 @theme {
@@ -73,7 +73,7 @@
     font-family: var(--font-display);
     font-weight: 400;
     text-transform: uppercase;
-    line-height: 0.86;
+    line-height: 0.88;
     letter-spacing: -0.004em;
   }
   .h2 {
@@ -119,7 +119,7 @@
 
   /* Accents: one per headline */
   .accent-tape {
-    background: var(--color-vis);
+    background: linear-gradient(180deg, transparent 15.5%, var(--color-vis) 15.5%, var(--color-vis) 84%, transparent 84%);
     color: var(--color-ink);
     padding: 0 0.07em;
     margin: 0 -0.02em;
@@ -127,7 +127,7 @@
     -webkit-box-decoration-break: clone;
   }
   .accent-ink {
-    background: var(--color-ink);
+    background: linear-gradient(180deg, transparent 15.5%, var(--color-ink) 15.5%, var(--color-ink) 84%, transparent 84%);
     color: var(--color-vis);
     padding: 0 0.07em;
     margin: 0 -0.02em;
@@ -264,27 +264,6 @@
     transform-origin: 50% 100%;
     transition: transform 0.55s var(--ease-expo);
   }
-  @media (hover: hover) and (pointer: fine) {
-    .svc-row:hover .sweep {
-      transform: scaleY(1);
-    }
-    .svc-row:hover {
-      color: var(--color-bone);
-      --focus: #d9f23a;
-    }
-    .svc-row:hover .svc-num {
-      color: var(--color-vis);
-    }
-    .svc-row:hover .svc-muted {
-      color: #b9b7af;
-    }
-    .svc-row:hover .svc-cta {
-      background: var(--color-vis);
-      color: var(--color-ink);
-      border-color: var(--color-vis);
-    }
-  }
-
   /* Quote form */
   .flabel {
     display: block;
@@ -451,13 +430,36 @@
   }
 
   .giant-phone {
-    font-size: clamp(54px, 15.2vw, 226px);
+    font-size: clamp(50px, 13.2vw, 194px);
   }
   .footer-mark {
-    font-size: clamp(56px, 15.6vw, 228px);
+    font-size: clamp(48px, 13.6vw, 198px);
     color: #1c1c19;
   }
 }
+
+/* Unlayered so it beats the row utilities while the row is inked */
+@media (hover: hover) and (pointer: fine) {
+  .svc-row:hover .sweep {
+    transform: scaleY(1);
+  }
+  .svc-row:hover {
+    color: var(--color-bone);
+    --focus: #d9f23a;
+  }
+  .svc-row:hover .svc-num {
+    color: var(--color-vis);
+  }
+  .svc-row:hover .svc-muted {
+    color: #b9b7af;
+  }
+  .svc-row:hover .svc-cta {
+    background: var(--color-vis);
+    color: var(--color-ink);
+    border-color: var(--color-vis);
+  }
+}
+
 
 @keyframes tape {
   to {

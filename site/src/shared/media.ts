@@ -10,17 +10,25 @@ export function publicUrl(path: string) {
  * high resolution (1920px); the rest are 315px squares, so keep them small
  * (gallery tiles, service thumbnails) until the client sends originals.
  */
-export const photos: Record<MediaKey, { src: string; sm?: string; w: number; h: number; alt: string; hiRes: boolean }> = {
-  streetTruck: { src: publicUrl('img/street-truck.jpg'), sm: publicUrl('img/street-truck-sm.jpg'), w: 1920, h: 1440, alt: 'Mendez-Vasquez dump truck loaded with debris on a Hudson County street', hiRes: true },
-  snowTruck: { src: publicUrl('img/snow-truck.jpg'), sm: publicUrl('img/snow-truck-sm.jpg'), w: 1920, h: 1440, alt: 'Mendez-Vasquez demolition and junk removal truck full of debris in the snow', hiRes: true },
-  dumpsterSign: { src: publicUrl('img/dumpster-sign.jpg'), w: 315, h: 315, alt: 'Mendez-Vasquez dumpster sign: yard cleanouts, basements, vacant apartments, demolition', hiRes: false },
-  jobExcavator: { src: publicUrl('img/job-excavator.jpg'), w: 315, h: 315, alt: 'Mini excavator loading soil into a Mendez-Vasquez truck', hiRes: false },
-  truckWhite: { src: publicUrl('img/truck-white.jpg'), w: 315, h: 315, alt: 'White Mendez-Vasquez dump truck parked in a driveway', hiRes: false },
-  jobLoaded: { src: publicUrl('img/job-loaded.jpg'), w: 315, h: 315, alt: 'Fully loaded Mendez-Vasquez truck on a residential street', hiRes: false },
-  crewStrapping: { src: publicUrl('img/crew-strapping.jpg'), w: 315, h: 315, alt: 'Crew member in a safety-yellow hoodie strapping down a load', hiRes: false },
-  truckBack: { src: publicUrl('img/truck-back.jpg'), w: 315, h: 315, alt: 'Back of a loaded Mendez-Vasquez truck with a ladder', hiRes: false },
-  crewTwo: { src: publicUrl('img/crew-two.jpg'), w: 315, h: 315, alt: 'Two Mendez-Vasquez crew members in front of their trucks', hiRes: false },
-  jobInterior: { src: publicUrl('img/job-interior.jpg'), w: 315, h: 315, alt: 'Crew member inside a room gutted down to the studs', hiRes: false },
+type Photo = { src: string; sm?: string; md?: string; xs?: string; w: number; h: number; alt: string; hiRes: boolean }
+
+export const photos: Record<MediaKey, Photo> = {
+  streetTruck: { src: publicUrl('img/street-truck.webp'), md: publicUrl('img/street-truck-md.webp'), sm: publicUrl('img/street-truck-sm.webp'), xs: publicUrl('img/street-truck-xs.webp'), w: 1920, h: 1440, alt: 'Mendez-Vasquez dump truck loaded with debris on a Hudson County street', hiRes: true },
+  snowTruck: { src: publicUrl('img/snow-truck.webp'), md: publicUrl('img/snow-truck-md.webp'), sm: publicUrl('img/snow-truck-sm.webp'), xs: publicUrl('img/snow-truck-xs.webp'), w: 1920, h: 1440, alt: 'Mendez-Vasquez demolition and junk removal truck full of debris in the snow', hiRes: true },
+  dumpsterSign: { src: publicUrl('img/dumpster-sign.webp'), w: 315, h: 315, alt: 'Mendez-Vasquez dumpster sign: yard cleanouts, basements, vacant apartments, demolition', hiRes: false },
+  jobExcavator: { src: publicUrl('img/job-excavator.webp'), w: 315, h: 315, alt: 'Mini excavator loading soil into a Mendez-Vasquez truck', hiRes: false },
+  truckWhite: { src: publicUrl('img/truck-white.webp'), w: 315, h: 315, alt: 'White Mendez-Vasquez dump truck parked in a driveway', hiRes: false },
+  jobLoaded: { src: publicUrl('img/job-loaded.webp'), w: 315, h: 315, alt: 'Fully loaded Mendez-Vasquez truck on a residential street', hiRes: false },
+  crewStrapping: { src: publicUrl('img/crew-strapping.webp'), w: 315, h: 315, alt: 'Crew member in a safety-yellow hoodie strapping down a load', hiRes: false },
+  truckBack: { src: publicUrl('img/truck-back.webp'), w: 315, h: 315, alt: 'Back of a loaded Mendez-Vasquez truck with a ladder', hiRes: false },
+  crewTwo: { src: publicUrl('img/crew-two.webp'), w: 315, h: 315, alt: 'Two Mendez-Vasquez crew members in front of their trucks', hiRes: false },
+  jobInterior: { src: publicUrl('img/job-interior.webp'), w: 315, h: 315, alt: 'Crew member inside a room gutted down to the studs', hiRes: false },
+}
+
+/** Responsive srcset for a photo (WebP at 640/900/1280/1920 for the hi-res ones). */
+export function srcSetOf(p: Photo) {
+  if (!p.hiRes) return undefined
+  return `${p.xs} 640w, ${p.sm} 900w, ${p.md} 1280w, ${p.src} 1920w`
 }
 
 /**
@@ -33,9 +41,9 @@ export const photos: Record<MediaKey, { src: string; sm?: string; w: number; h: 
  * - boxes: cardboard boxes and clutter in a dark dumpster (8s, 1280px)
  */
 export const videos = {
-  dump: { src: publicUrl('media/dump.mp4'), poster: publicUrl('media/dump-poster.jpg') },
-  demo: { src: publicUrl('media/demo.mp4'), poster: publicUrl('media/demo-poster.jpg') },
-  cityScrub: { src: publicUrl('media/city-scrub.mp4'), mobile: publicUrl('media/city-m.mp4'), poster: publicUrl('media/city-poster.jpg') },
-  crew: { src: publicUrl('media/crew.mp4'), poster: publicUrl('media/crew-poster.jpg') },
-  boxes: { src: publicUrl('media/boxes.mp4'), poster: publicUrl('media/boxes-poster.jpg') },
+  dump: { src: publicUrl('media/dump.mp4'), poster: publicUrl('media/dump-poster.webp') },
+  demo: { src: publicUrl('media/demo.mp4'), poster: publicUrl('media/demo-poster.webp') },
+  cityScrub: { src: publicUrl('media/city-scrub.mp4'), mobile: publicUrl('media/city-m.mp4'), poster: publicUrl('media/city-poster.webp') },
+  crew: { src: publicUrl('media/crew.mp4'), poster: publicUrl('media/crew-poster.webp') },
+  boxes: { src: publicUrl('media/boxes.mp4'), poster: publicUrl('media/boxes-poster.webp') },
 }

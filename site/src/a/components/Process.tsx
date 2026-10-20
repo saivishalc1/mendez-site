@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { ArrowRight, Camera, Receipt, Truck } from 'lucide-react'
 import { useLang } from '@shared/i18n'
 import { openQuote } from '@shared/useQuote'
@@ -19,7 +19,7 @@ function Card({ i, n, progress, step }: { i: number; n: number; progress: Motion
   const Icon = ICONS[i % ICONS.length]
   return (
     <li className="sticky mb-[12vh] last:mb-0" style={{ top: `calc(var(--stack-top) + ${i * 26}px)` }}>
-      <motion.article
+      <m.article
         style={reduce ? undefined : { scale }}
         className={`relative flex min-h-[380px] origin-top flex-col justify-between overflow-hidden rounded-[3px] p-6 shadow-[0_-20px_50px_rgba(11,11,10,.18)] md:min-h-[460px] md:p-10 ${skin.card}`}
       >
@@ -34,7 +34,7 @@ function Card({ i, n, progress, step }: { i: number; n: number; progress: Motion
           <p className={`mt-4 max-w-[34ch] text-[17px] leading-[1.6] md:text-[19px] ${skin.body}`}>{step.body}</p>
         </div>
         {i === n - 1 && <Hazard className="absolute inset-x-0 bottom-0" />}
-      </motion.article>
+      </m.article>
     </li>
   )
 }

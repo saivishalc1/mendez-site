@@ -3,7 +3,7 @@
 //   node --experimental-websocket walk.mjs <url> <width> <height> <outprefix> <port>
 import { writeFileSync } from 'node:fs'
 const [url, w, h, prefix, port = '9333'] = process.argv.slice(2)
-const t = (await (await fetch('http://127.0.0.1:${port}/json')).json()).find((x) => x.type === 'page')
+const t = (await (await fetch(`http://127.0.0.1:${port}/json`)).json()).find((x) => x.type === 'page')
 const ws = new WebSocket(t.webSocketDebuggerUrl); await new Promise((r) => (ws.onopen = r))
 let id = 0; const p = new Map(); const errors = []; const failed = []
 ws.onmessage = (m) => { const d = JSON.parse(m.data); if (p.has(d.id)) { p.get(d.id)(d); p.delete(d.id) }

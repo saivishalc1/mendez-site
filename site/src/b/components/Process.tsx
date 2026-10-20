@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { useLang } from '@shared/i18n'
 import { openQuote } from '@shared/useQuote'
 import { Label, Reveal, Title } from './ui'
@@ -12,7 +12,7 @@ function Card({ step, i, n, progress }: { step: Step; i: number; n: number; prog
   const scale = useTransform(progress, [i / n, 1], reduce ? [1, 1] : [1, 1 - (n - 1 - i) * 0.035])
   return (
     <li className="sticky" style={{ top: `calc(96px + ${i * 22}px)` }}>
-      <motion.article
+      <m.article
         style={{ scale, transformOrigin: '50% 0%' }}
         className="relative mb-6 grid min-h-[22rem] grid-cols-1 gap-6 rounded-[3px] border border-rule bg-paper-2 p-7 shadow-[0_-18px_40px_-28px_rgba(23,22,20,.35)] sm:p-10 lg:mb-10 lg:min-h-[26rem] lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-10 lg:p-14"
       >
@@ -27,7 +27,7 @@ function Card({ step, i, n, progress }: { step: Step; i: number; n: number; prog
           <h3 className="display text-[2.4rem] leading-[1] tracking-[-0.02em] sm:text-[3rem] lg:text-[3.4rem]">{step.title}</h3>
           <p className="mt-4 max-w-[28rem] text-[16px] leading-[1.6] text-body lg:text-[17px]">{step.body}</p>
         </div>
-      </motion.article>
+      </m.article>
     </li>
   )
 }
@@ -40,7 +40,7 @@ export function Process() {
 
   return (
     <section id="process" aria-labelledby="process-title" className="relative bg-paper">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-5 py-28 sm:px-8 lg:grid-cols-12 lg:gap-14 lg:px-16 lg:py-40">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 px-5 pt-28 pb-16 sm:px-8 lg:grid-cols-12 lg:gap-14 lg:px-16 lg:pt-40 lg:pb-24">
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-[120px]">
             <Label>{p.kicker}</Label>

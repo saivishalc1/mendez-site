@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" source("./");
 
 @theme {
   --color-paper: #f1ece3;
@@ -65,6 +65,7 @@
   .display {
     font-family: var(--font-serif);
     font-weight: 400;
+    text-wrap: balance;
     letter-spacing: -0.025em;
     line-height: 0.95;
   }
@@ -104,10 +105,10 @@
   }
 
   .hero-title {
-    font-size: clamp(3.5rem, 14.4vw, 8.25rem);
+    font-size: clamp(3.5rem, 16vw, 8.25rem);
   }
   html[lang="es"] .hero-title {
-    font-size: clamp(3.1rem, 12.4vw, 7.1rem);
+    font-size: clamp(3.1rem, 13.6vw, 7.1rem);
   }
   @media (min-width: 1024px) {
     .hero-title {

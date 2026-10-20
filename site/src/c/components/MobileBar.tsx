@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react'
+import { AnimatePresence, m, useMotionValueEvent, useScroll } from 'motion/react'
 import { MessageSquare, Phone } from 'lucide-react'
 import { useLang } from '@shared/i18n'
 import { business } from '@shared/business'
@@ -31,7 +31,7 @@ export function MobileBar() {
   return (
     <AnimatePresence>
       {show && (
-        <motion.nav
+        <m.nav
           className="mbar"
           aria-label={t.hero.secondary}
           initial={{ y: 90 }}
@@ -50,7 +50,7 @@ export function MobileBar() {
           <button type="button" className="mbar-quote" onClick={() => openQuote()}>
             {t.hero.primaryShort}
           </button>
-        </motion.nav>
+        </m.nav>
       )}
     </AnimatePresence>
   )

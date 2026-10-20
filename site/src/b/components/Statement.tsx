@@ -1,5 +1,5 @@
 import { useMemo, useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { useLang } from '@shared/i18n'
 import { Label } from './ui'
 
@@ -23,9 +23,9 @@ function W({ word, i, n, progress }: { word: Word; i: number; n: number; progres
   const start = i / n
   const opacity = useTransform(progress, [start, Math.min(1, start + 1.6 / n)], [0.16, 1])
   return (
-    <motion.span style={{ opacity }} className={word.accent ? 'accent' : undefined}>
+    <m.span style={{ opacity }} className={word.accent ? 'accent' : undefined}>
       {word.text}{' '}
-    </motion.span>
+    </m.span>
   )
 }
 
@@ -38,7 +38,7 @@ export function Statement() {
 
   return (
     <section aria-labelledby="statement-kicker" className="relative">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-8 px-5 py-28 sm:px-8 lg:grid-cols-12 lg:gap-14 lg:px-16 lg:py-44">
+      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-8 px-5 pt-28 pb-20 sm:px-8 lg:grid-cols-12 lg:gap-14 lg:px-16 lg:pt-44 lg:pb-28">
         <div className="lg:col-span-3 lg:pt-4">
           <Label>
             <span id="statement-kicker">{t.statement.kicker}</span>

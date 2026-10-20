@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type DragEvent, type ReactNode } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { ImagePlus, Mail, MessageCircle, MessageSquareText, Phone, X } from 'lucide-react'
 import { useLang } from '@shared/i18n'
 import { business } from '@shared/business'
@@ -111,7 +111,7 @@ export function Quote() {
           <div className="rounded-[3px] border border-rule bg-paper p-6 shadow-[0_40px_80px_-50px_rgba(23,22,20,.35)] sm:p-10 lg:p-14">
             <AnimatePresence mode="wait" initial={false}>
               {(q.status === 'idle' || q.status === 'sending') && (
-                <motion.form
+                <m.form
                   key="form"
                   noValidate
                   onSubmit={q.submit}
@@ -308,11 +308,11 @@ export function Quote() {
                       {q.status === 'sending' ? c.sending : c.submit}
                     </button>
                   </div>
-                </motion.form>
+                </m.form>
               )}
 
               {q.status === 'choose' && (
-                <motion.div
+                <m.div
                   key="choose"
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -352,11 +352,11 @@ export function Quote() {
                   <button type="button" onClick={q.back} className="link-u mt-6 text-[14px]">
                     ← {c.back}
                   </button>
-                </motion.div>
+                </m.div>
               )}
 
               {(q.status === 'sent' || q.status === 'error') && (
-                <motion.div
+                <m.div
                   key="done"
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -366,7 +366,7 @@ export function Quote() {
                   className="py-4"
                 >
                   <svg aria-hidden viewBox="0 0 64 64" className="size-16 text-rust">
-                    <motion.circle
+                    <m.circle
                       cx="32"
                       cy="32"
                       r="30"
@@ -378,7 +378,7 @@ export function Quote() {
                       transition={{ duration: 1.1, ease }}
                     />
                     {q.status === 'sent' && (
-                      <motion.path
+                      <m.path
                         d="M20 33l8 8 16-17"
                         fill="none"
                         stroke="currentColor"
@@ -401,7 +401,7 @@ export function Quote() {
                       ← {c.back}
                     </button>
                   </div>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
           </div>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode, type RefObject } from 'react'
-import { motion } from 'motion/react'
+import { useDeferredPoster } from '@shared/useDeferredPoster'
+import { m, useInView } from 'motion/react'
 import { business } from '@shared/business'
 import { lowPower, prefersReducedMotion } from '@shared/SmoothScroll'
 
@@ -16,7 +17,7 @@ export function Kicker({ children, className = '' }: { children: ReactNode; clas
 /** Dashed reflective stripe, like the DOT tape on the trucks. Draws across when it enters the viewport. */
 export function Stripe({ className = '', delay = 0, instant = false }: { className?: string; delay?: number; instant?: boolean }) {
   return (
-    <motion.div
+    <m.div
       aria-hidden="true"
       className={`tape ${className}`}
       initial={{ scaleX: 0 }}
@@ -69,6 +70,7 @@ export function useNear<T extends Element>(ref: RefObject<T | null>, margin = '3
 export function LazyVideo({ src, poster, className = '' }: { src: string; poster: string; className?: string }) {
   const ref = useRef<HTMLVideoElement>(null)
   const near = useNear(ref, '200px')
+  useDeferredPoster(ref, poster)
   const [still] = useState(() => lowPower() || prefersReducedMotion())
   useEffect(() => {
     const v = ref.current
@@ -78,13 +80,13 @@ export function LazyVideo({ src, poster, className = '' }: { src: string; poster
       v.play().catch(() => {})
     } else v.pause()
   }, [near, src, still])
-  return <video ref={ref} className={className} poster={poster} muted playsInline loop preload="none" aria-hidden="true" tabIndex={-1} />
+  return <video ref={ref} className={className} muted playsInline loop preload="none" aria-hidden="true" tabIndex={-1} />
 }
 
 /** Fade + rise when scrolled into view. */
 export function Rise({ children, delay = 0, className = '', y = 28 }: { children: ReactNode; delay?: number; className?: string; y?: number }) {
   return (
-    <motion.div
+    <m.div
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -92,7 +94,26 @@ export function Rise({ children, delay = 0, className = '', y = 28 }: { children
       transition={{ duration: 0.8, delay, ease: [0.2, 0.8, 0.2, 1] }}
     >
       {children}
-    </motion.div>
+    </m.div>
+  )
+}
+
+function MaskLine({ children, className, delay, instant }: { children: ReactNode; className: string; delay: number; instant: boolean }) {
+  // Observe the (unclipped) outer line: the inner span starts clipped out of view, so it can't be observed itself.
+  const ref = useRef<HTMLSpanElement>(null)
+  const seen = useInView(ref, { once: true, margin: '0px 0px -8% 0px' })
+  const on = instant || seen
+  return (
+    <span ref={ref} className={`mask ${className}`}>
+      <m.span
+        className="mask-in"
+        initial={{ y: '108%', skewY: 5 }}
+        animate={on ? { y: '0%', skewY: 0 } : { y: '108%', skewY: 5 }}
+        transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
+      >
+        {children}
+      </m.span>
+    </span>
   )
 }
 
@@ -101,16 +122,9 @@ export function MaskLines({ lines, className = '', delay = 0, instant = false }:
   return (
     <>
       {lines.map((line, i) => (
-        <span key={i} className={`mask ${className}`}>
-          <motion.span
-            className="mask-in"
-            initial={{ y: '108%', skewY: 5 }}
-            {...(instant ? { animate: { y: '0%', skewY: 0 } } : { whileInView: { y: '0%', skewY: 0 }, viewport: { once: true, margin: '0px 0px -8% 0px' } })}
-            transition={{ duration: 0.9, delay: delay + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {line}
-          </motion.span>
-        </span>
+        <MaskLine key={i} className={className} delay={delay + i * 0.1} instant={instant}>
+          {line}
+        </MaskLine>
       ))}
     </>
   )

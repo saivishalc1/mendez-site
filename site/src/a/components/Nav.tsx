@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'motion/react'
+import { AnimatePresence, m } from 'motion/react'
 import { useLenis } from 'lenis/react'
 import { ArrowRight, Menu, Phone, X } from 'lucide-react'
 import { useLang } from '@shared/i18n'
@@ -119,12 +119,12 @@ export function Nav() {
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             id="a-menu"
             role="dialog"
             aria-modal="true"
             aria-label={t.nav.menu}
-            className="surface-dark fixed inset-0 z-[84] flex flex-col bg-ink px-5 pt-24 pb-8 lg:hidden"
+            className="surface-dark fixed inset-0 z-[84] flex flex-col bg-ink px-5 pt-24 pb-20 lg:hidden"
             initial={{ y: '-100%' }}
             animate={{ y: 0 }}
             exit={{ y: '-100%' }}
@@ -133,7 +133,7 @@ export function Nav() {
             <nav aria-label="Main" className="flex-1">
               <ul className="flex flex-col">
                 {links.map((l, i) => (
-                  <motion.li
+                  <m.li
                     key={l.href}
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -144,7 +144,7 @@ export function Nav() {
                       {l.label}
                       <span className="text-[14px] font-sans tracking-normal text-vis">0{i + 1}</span>
                     </a>
-                  </motion.li>
+                  </m.li>
                 ))}
               </ul>
             </nav>
@@ -167,7 +167,7 @@ export function Nav() {
                 <LangToggle />
               </div>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

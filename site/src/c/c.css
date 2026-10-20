@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" source("./");
 
 /* ───────── Direction C · Truck Side ───────── */
 @theme {
@@ -586,14 +586,15 @@ a {
 }
 .status-sep {
   color: var(--stone);
-  margin: 0 2px 0 10px;
 }
-.status > .status-sep {
-  margin: 0 2px;
+.status > .hide-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 .hero-h1 {
   margin: 26px 0;
-  font-size: min(150px, 10.4vw, 16.4svh);
+  font-size: min(148px, 10.4vw, 15.2svh);
 }
 .hero-lede {
   margin: 0;
@@ -665,7 +666,7 @@ a {
   align-items: flex-end;
   gap: 24px;
   padding-top: 18px;
-  padding-bottom: 34px;
+  padding-bottom: 64px; /* clears the review-stage A/B/C switch */
 }
 .hero-phone {
   display: block;
@@ -685,7 +686,7 @@ a {
 }
 .hero-phone .d-wide {
   display: block;
-  font-size: clamp(34px, 4.6vw, 66px);
+  font-size: clamp(34px, 4.2vw, 60px);
 }
 .hero-facts {
   display: flex;
@@ -1178,7 +1179,7 @@ a {
   inset: 0;
   background:
     linear-gradient(180deg, var(--ink) 0%, rgba(12, 12, 12, 0) 26%, rgba(12, 12, 12, 0) 74%, var(--coal) 100%),
-    rgba(12, 12, 12, 0.38);
+    rgba(12, 12, 12, 0.46);
 }
 .vband-text {
   position: relative;
@@ -1647,11 +1648,14 @@ a {
   height: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: 48px;
+  gap: 72px;
   align-items: center;
 }
 .areas-copy .sec-title {
-  font-size: clamp(52px, 5.8vw, 98px);
+  font-size: clamp(48px, 5vw, 84px);
+}
+.faq-grid .sec-title {
+  font-size: clamp(54px, 5.6vw, 92px);
 }
 .areas-body {
   margin: 26px 0 0;
@@ -1672,7 +1676,7 @@ a {
   color: var(--stone);
 }
 .towns {
-  justify-self: end;
+  justify-self: start;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1975,6 +1979,7 @@ a {
   justify-content: space-between;
   gap: 16px 32px;
   padding: 30px 0 calc(34px + env(safe-area-inset-bottom));
+  padding-left: 120px; /* clears the review-stage A/B/C switch */
   border-top: 1px solid rgba(244, 242, 237, 0.1);
 }
 .foot-mark {
@@ -2074,8 +2079,9 @@ a {
     height: 64px;
   }
   .nav .wordmark {
-    font-size: 14px;
+    font-size: 13px;
     gap: 8px;
+    font-variation-settings: 'wdth' 108;
   }
   .nav .wordmark i {
     width: 18px;
@@ -2086,8 +2092,12 @@ a {
   }
   .langpill button {
     min-height: 38px;
-    min-width: 40px;
-    padding: 0 10px;
+    min-width: 38px;
+    padding: 0 8px;
+  }
+  .nav-menu {
+    width: 44px;
+    height: 44px;
   }
 
   .hero-grid {
@@ -2102,7 +2112,7 @@ a {
   }
   .hero-h1 {
     margin: 20px 0 18px;
-    font-size: 20.5vw;
+    font-size: 18.6vw;
   }
   .hero-lede {
     font-size: 17px;
@@ -2160,7 +2170,7 @@ a {
     padding-top: 0;
   }
   .svc-name {
-    font-size: clamp(40px, 11.5vw, 56px);
+    font-size: clamp(36px, 10vw, 56px);
     align-self: end;
   }
   .svc-thumb {
@@ -2234,8 +2244,9 @@ a {
   .loads .load:last-child:nth-child(odd) {
     grid-column: span 2;
   }
-  .quote-steps li {
-    font-size: 18px;
+  .quote-steps,
+  .quote-call {
+    display: none;
   }
 
   .areas-loop {
@@ -2288,6 +2299,7 @@ a {
   .foot {
     flex-direction: column;
     align-items: flex-start;
+    padding-left: 0;
     padding-bottom: calc(96px + env(safe-area-inset-bottom));
   }
 

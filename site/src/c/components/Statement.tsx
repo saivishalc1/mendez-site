@@ -1,5 +1,5 @@
 import { useMemo, useRef } from 'react'
-import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
+import { m, useReducedMotion, useScroll, useTransform, type MotionValue } from 'motion/react'
 import { useLang } from '@shared/i18n'
 import { Kicker } from './ui'
 
@@ -23,9 +23,9 @@ function LitWord({ word, i, n, p }: { word: Word; i: number; n: number; p: Motio
   const start = i / n
   const opacity = useTransform(p, [start, Math.min(1, start + 1.6 / n)], [0.13, 1])
   return (
-    <motion.span className={word.accent ? 'acc' : undefined} style={{ opacity }}>
+    <m.span className={word.accent ? 'acc' : undefined} style={{ opacity }}>
       {word.w}{' '}
-    </motion.span>
+    </m.span>
   )
 }
 
