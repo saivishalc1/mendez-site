@@ -14,6 +14,7 @@ import { Areas } from './components/Areas'
 import { About } from './components/About'
 import { Contact } from './components/Contact'
 import { MobileBar } from './components/MobileBar'
+import { Progressive } from '@shared/Progressive'
 
 const SKIP = { en: 'Skip to content', es: 'Saltar al contenido' } as const
 
@@ -31,17 +32,21 @@ export function App() {
         <Nav />
         <main id="main">
           <Hero />
-          <Statement />
-          <Services />
-          <Film />
-          <Process />
-          <Work />
-          <Quote />
-          <Areas />
-          <About />
+          <Progressive
+            name="main"
+            sections={[
+              <Statement key="statement" />,
+              <Services key="services" />,
+              <Film key="film" />,
+              <Process key="process" />,
+              <Work key="work" />,
+              <Quote key="quote" />,
+              <Areas key="areas" />,
+              <About key="about" />,
+            ]}
+          />
         </main>
-        <Contact />
-        <MobileBar />
+        <Progressive after="main" sections={[<Contact key="contact" />, <MobileBar key="bar" />]} />
         <DirectionSwitch current="b" />
       </SmoothScroll>
     </MotionConfig>

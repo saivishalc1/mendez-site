@@ -16,6 +16,7 @@ import { Areas } from './components/Areas'
 import { AboutFaq } from './components/AboutFaq'
 import { Contact } from './components/Contact'
 import { MobileBar } from './components/MobileBar'
+import { Progressive } from '@shared/Progressive'
 
 export function App() {
   const { lang } = useLang()
@@ -30,17 +31,21 @@ export function App() {
         <Nav />
         <main id="main" className="c-root">
           <Hero q={q} />
-          <Statement />
-          <Services />
-          <VideoBand />
-          <Process />
-          <Work />
-          <Quote q={q} />
-          <Areas />
-          <AboutFaq />
+          <Progressive
+            name="main"
+            sections={[
+              <Statement key="statement" />,
+              <Services key="services" />,
+              <VideoBand key="video" />,
+              <Process key="process" />,
+              <Work key="work" />,
+              <Quote key="quote" q={q} />,
+              <Areas key="areas" />,
+              <AboutFaq key="about" />,
+            ]}
+          />
         </main>
-        <Contact />
-        <MobileBar />
+        <Progressive after="main" sections={[<Contact key="contact" />, <MobileBar key="bar" />]} />
         <DirectionSwitch current="c" />
       </SmoothScroll>
     </MotionConfig>

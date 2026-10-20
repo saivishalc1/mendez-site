@@ -12,6 +12,7 @@ import { Areas, Takes } from './components/Areas'
 import { AboutFaq } from './components/AboutFaq'
 import { Contact, Footer } from './components/Contact'
 import { MobileBar } from './components/MobileBar'
+import { Progressive } from '@shared/Progressive'
 
 export function App() {
   return (
@@ -20,18 +21,22 @@ export function App() {
         <Nav />
         <main>
           <Hero />
-          <Statement />
-          <Services />
-          <Work />
-          <Process />
-          <Quote />
-          <Takes />
-          <Areas />
-          <AboutFaq />
-          <Contact />
+          <Progressive
+            name="main"
+            sections={[
+              <Statement key="statement" />,
+              <Services key="services" />,
+              <Work key="work" />,
+              <Process key="process" />,
+              <Quote key="quote" />,
+              <Takes key="takes" />,
+              <Areas key="areas" />,
+              <AboutFaq key="about" />,
+              <Contact key="contact" />,
+            ]}
+          />
         </main>
-        <Footer />
-        <MobileBar />
+        <Progressive after="main" sections={[<Footer key="footer" />, <MobileBar key="bar" />]} />
         <DirectionSwitch current="a" />
       </MotionConfig>
     </SmoothScroll>

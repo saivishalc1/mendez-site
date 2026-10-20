@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { business, FORM_ENDPOINT } from './business'
 import type { JobId, LoadId } from './content/en'
 import { useLang } from './i18n'
+import { scrollToAnchor } from './Progressive'
 
 export type QuoteValues = {
   job: JobId | null
@@ -27,7 +28,7 @@ const QUOTE_EVENT = 'mv:quote'
  */
 export function openQuote(job?: JobId) {
   window.dispatchEvent(new CustomEvent(QUOTE_EVENT, { detail: { job } }))
-  document.getElementById('quote')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  scrollToAnchor('quote')
 }
 
 function digits(s: string) {
